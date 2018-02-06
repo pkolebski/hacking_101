@@ -1,12 +1,10 @@
 def hack_calculator(hack: str, _letters={'a': 1, 'b': 2, 'c': 3}, _phrases={'ba': 10, 'baa': 20}):
     letters = _letters
     phrases = _phrases
-    letters_occurrences = {}
     letter_error = False
-
-    for letter in letters:
-        letters_occurrences[letter] = 0
     points = 0
+
+    letters_occurrences = {letter: 0 for letter in letters}
 
     for letter in hack:
         if letter in letters:
@@ -20,6 +18,7 @@ def hack_calculator(hack: str, _letters={'a': 1, 'b': 2, 'c': 3}, _phrases={'ba'
     if letter_error:
         return points
 
+    # Looking for a phrase in input string. Starting with most valuable
     for phrase, point in sorted(phrases.items(), key=lambda x: x[1], reverse=True):
         index = hack.find(phrase)
         while index >= 0:
